@@ -31,15 +31,7 @@
                 contentType: 'application/json',
             })
                 .done((res) => {
-
                     saveByteArray(res);
-
-                    // const base64 = '';  // …
-                    // const link = document.createElement('a');
-                    // link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + res;
-                    // link.download = 'my-document.docx';
-                    // link.click();
-                    // console.log('success')
                 })
                 .fail(() => console.log('fail'));
         });

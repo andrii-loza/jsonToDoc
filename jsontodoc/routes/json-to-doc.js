@@ -1,13 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-
 var docx = require('docx-h4');
-// import * as fs from "fs";
 
 const fs = require('fs');
 
 const {Document, Paragraph, Table, TableCell, TableRow, TabStopType, TabStopPosition, Section, Run, Packer, TextRun, Footer, Hyperlink} = docx;
+const doc = new docx.Document({
+    creator: 'author',
+    title: 'Sample Document'
+    // description: 'A brief example of using docx',
+});
 
 router.get('/', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../public', 'json.html'));
@@ -15,54 +18,27 @@ router.get('/', function (req, res, next) {
 
 router.post('/send-json', async function (req, res, next) {
     let data = req.body;
-    // console.log(data);
+    console.log(data);
 
+    setStyles();
+    doc.createParagraph(data['template'].title).style('mainHeader');
 
-    let templateText = `Contractor[Title]  - Company providing services, JSC, company reg. No 302695151, 
-    located at Washington Ave. 250 - 50, Chicago, IL, VAT payer code: LT303030000 regulated under the laws of 
-    Illinois, United States of America, hereinafter referred to as «CONTRACTOR»,`;
-
-    const doc = new docx.Document({
-        creator: 'author',
-        title: 'Sample Document'
-        // description: 'A brief example of using docx',
+    data['template'].sections.forEach(section => {
+        doc.addParagraph(new Paragraph(new TextRun(section.title.toUpperCase()).break().break()).style('subHeader'));
+        section['included_terms'].forEach((term, index) => {
+            if(index===0) {
+                let par = new Paragraph(new TextRun(term.text).break().break()).style('text');
+                doc.addParagraph(par);
+            } else {
+                let par = new Paragraph(new TextRun(term.text).break()).style('text');
+                doc.addParagraph(par);
+            }
+        });
     });
-
-    doc.Styles.createParagraphStyle('mainHeader', 'Main Header')
-        .basedOn('Normal')
-        .next('Normal')
-        .font('Calibri (Заголовки)')
-        .color(`17365d`)
-        .size(tipsToPx(26))
-        .center()
-        .thematicBreak();
-
-
-    doc.Styles.createParagraphStyle('subHeader', 'Sub Header')
-        .center()
-        .basedOn('Normal')
-        .next('Normal')
-        .font('Calibri (Заголовки)')
-        .size(tipsToPx(14))
-        .bold()
-        .color('4f81bd');
-
-    doc.Styles.createParagraphStyle('text', 'text')
-        .basedOn('Normal')
-        .next('Normal')
-        .font('Cambria (Основний текст)')
-        .size(tipsToPx(11))
-        .color('black')
-        .left();
-
 
     doc.Footer.addParagraph(createFooter());
 
-    doc.createParagraph('AGREEMENT OF PROVIDING IT DEVELOPMENT SERVICES').style('mainHeader');
-    doc.createParagraph('Parties').style('subHeader');
-    doc.createParagraph(templateText).style('text');
-
-    generateTable(doc);
+    // generateTable(doc);
 
     const exporter = new docx.LocalPacker(doc);
     exporter.pack('files/test1.docx');
@@ -70,6 +46,34 @@ router.post('/send-json', async function (req, res, next) {
     console.log('SUCCESS');
 
 });
+
+function setStyles() {
+    doc.Styles.createParagraphStyle('mainHeader', 'Main Header')
+        .basedOn('Normal')
+        .next('Normal')
+        .font('Calibri')
+        .color(`17365d`)
+        .size(tipsToPx(26))
+        .center()
+        .thematicBreak();
+
+    doc.Styles.createParagraphStyle('subHeader', 'Sub Header')
+        .center()
+        .basedOn('Normal')
+        .next('Normal')
+        .font('Calibri')
+        .size(tipsToPx(14))
+        .bold()
+        .color('4f81bd');
+
+    doc.Styles.createParagraphStyle('text', 'text')
+        .basedOn('Normal')
+        .next('Normal')
+        .font('Cambria')
+        .size(tipsToPx(11))
+        .color('black')
+        .left();
+}
 
 function createFooter() {
     const par = new Paragraph();
@@ -100,6 +104,8 @@ function generateSplitedPar() {
     textArr.push(new TextRun('Reg. no. 302695151').break().break());
     textArr.push(new TextRun('Washington Ave. 250 - 50, Chicago, IL,').break().break());
     textArr.push(new TextRun('Illinois, United States of America').break().break());
+    textArr.push(new TextRun('________________________________________').break().break());
+    textArr.push(new TextRun('Signature').break().break());
 
     textArr.forEach(item => par.addRun(item));
     par.left();

@@ -24,23 +24,34 @@
 
             let json = JSON.parse($('textarea')[0].value);
 
-            // fetch('/send-json',{
-            //     method: 'POST',
-            //     data: JSON.stringify(json),
-            //     contentType: 'application/json',
-            // })
-            //     .then(resp => resp.json())
-            //     .then(json => console.log(json));
-
             $.ajax({
                 type: 'post',
                 url: '/json/send-json',
                 data: JSON.stringify(json),
                 contentType: 'application/json',
             })
-                .done(() => console.log('success'))
+                .done((res) => {
+
+                    saveByteArray(res);
+
+                    // const base64 = '';  // …
+                    // const link = document.createElement('a');
+                    // link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + res;
+                    // link.download = 'my-document.docx';
+                    // link.click();
+                    // console.log('success')
+                })
                 .fail(() => console.log('fail'));
-        })
+        });
+
+        function saveByteArray(reportName, byte) {
+            let blob = new Blob([byte], {type: "application/pdf"});
+            let link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            let fileName = reportName;
+            link.download = fileName;
+            link.click();
+        }
     });
 </script>
 </body>

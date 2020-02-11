@@ -1,0 +1,379 @@
+{
+  "template":{
+    "domain":"construction-bath-renovation",
+    "sections":[
+      {
+        "id":null,
+        "title":"Managing Materials",
+        "can_be_removed":true,
+        "is_in_footer":false,
+        "domain":"construction-bath-renovation-mm",
+        "included_terms":[
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Service provider (Contractor) is responsible for purchasing of the following materials: %s",
+            "language":"en-US",
+            "domain":"construction-bath-renovation-materials",
+            "is_created_by_user":false,
+            "manually_entered_text":"Bath stove, Sink, Taps, Shower pad, glueing materials",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Service provider (Contractor), when purchasing, pays the bills and collects receipts for future reimbursement made by the Client. %s",
+            "language":"en-US",
+            "domain":"construction-bath-renovation-materials",
+            "is_created_by_user":false,
+            "manually_entered_text":"Client agrees to reimburse all purchases confirmed.",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Client (Owner) is responsible for purchasing of the following materials: %s",
+            "language":"en-US",
+            "domain":"construction-bath-renovation-materials",
+            "is_created_by_user":false,
+            "manually_entered_text":"Bathroom furniture, lamps",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Purchases made by the Contractor exceeding %s each item must be confirmed by Client. Client commits to confirm the purchase in a timely manner not exceeding",
+            "language":"en-US",
+            "domain":"construction-bath-renovation-materials",
+            "is_created_by_user":false,
+            "manually_entered_text":"Bathroom furniture, lamps",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Client and Service provider agrees, that purchased details should: %s",
+            "language":"en-US",
+            "domain":"construction-bath-renovation-materials",
+            "is_created_by_user":false,
+            "manually_entered_text":"Avoid curves, steps and other non-essential details or ornamentation to have simple and cost-effective design.",
+            "parts":[
+
+            ]
+          }
+        ],
+        "excluded_terms":[
+
+        ],
+        "recorded_requests":[
+
+        ]
+      },
+      {
+        "id":null,
+        "title":"Process Management",
+        "can_be_removed":true,
+        "is_in_footer":false,
+        "domain":"construction-process-management",
+        "included_terms":[
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Parties agree to work on the Bathroom renovation project and that the scope of work is following: %s",
+            "language":"en-US",
+            "domain":"construction-process-management",
+            "is_created_by_user":false,
+            "manually_entered_text":"List services provided by Service provider (including subcontractors, if needed) to the Client.",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"%s takes care of planning permissions neded for the new bathroom.",
+            "language":"en-US",
+            "domain":"construction-process-management",
+            "is_created_by_user":false,
+            "manually_entered_text":"Client",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"%s ensures that the new layout plan is confirmed with electrician, tiler and other related trades before signing off the renovation.",
+            "language":"en-US",
+            "domain":"construction-process-management",
+            "is_created_by_user":false,
+            "manually_entered_text":"Client",
+            "parts":[
+
+            ]
+          }
+        ],
+        "excluded_terms":[
+
+        ],
+        "recorded_requests":[
+
+        ]
+      },
+      {
+        "id":null,
+        "title":"Quality Assurance",
+        "can_be_removed":true,
+        "is_in_footer":false,
+        "domain":"construction-bath-renovation",
+        "included_terms":[
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Client will use as a third party and mediator %s to ensure that quality of services provided by the Service provider meets the agreed standards.",
+            "language":"en-US",
+            "domain":"construction-qa",
+            "is_created_by_user":false,
+            "manually_entered_text":"John Doe",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Service provider supervises and takes responsibility for work maintained by subcontractors.",
+            "language":"en-US",
+            "domain":"construction-qa",
+            "is_created_by_user":false,
+            "manually_entered_text":"",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Client might send to Service provider evidence of work not meeting quality requirements via %s. Service provider agrees to respond in timely manner and fix work which can be described as faulty and/or with hidden defects.",
+            "language":"en-US",
+            "domain":"construction-qa",
+            "is_created_by_user":false,
+            "manually_entered_text":"Email or Messenger",
+            "parts":[
+
+            ]
+          }
+        ],
+        "excluded_terms":[
+
+        ],
+        "recorded_requests":[
+
+        ]
+      },
+      {
+        "id":null,
+        "title":"Subcontracting and Third Parties",
+        "can_be_removed":true,
+        "is_in_footer":false,
+        "domain":"construction-bath-renovation-3rd",
+        "included_terms":[
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Service provider willing to include third parties needs to get a written permission from the Client.",
+            "language":"en-US",
+            "domain":"construction-subcontracting",
+            "is_created_by_user":false,
+            "manually_entered_text":"",
+            "parts":[
+
+            ]
+          }
+        ],
+        "excluded_terms":[
+
+        ],
+        "recorded_requests":[
+
+        ]
+      },
+      {
+        "id":null,
+        "title":"Payment Details",
+        "can_be_removed":false,
+        "is_in_footer":false,
+        "domain":"construction-bath-renovation-payments",
+        "included_terms":[
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Parties agree that the price for the service price of scope described in this agreement is $ %s. This sum does not include price of materials needed to provide the Service.",
+            "language":"en-US",
+            "domain":"construction-payments",
+            "is_created_by_user":false,
+            "manually_entered_text":"",
+            "parts":[
+              {
+                "position_id":0,
+                "text":"10.000,00"
+              }
+            ]
+          }
+        ],
+        "excluded_terms":[
+
+        ],
+        "recorded_requests":[
+
+        ]
+      },
+      {
+        "id":null,
+        "title":"Other terms",
+        "can_be_removed":false,
+        "is_in_footer":false,
+        "domain":"construction-bath-renovation",
+        "included_terms":[
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Parties agree that the bathroom renovation is finished till %s.",
+            "language":"en-US",
+            "domain":"construction-bath-renovation-payments",
+            "is_created_by_user":false,
+            "manually_entered_text":"January 22nd, 2020",
+            "parts":[
+
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"Service provider may take pictures of the work and to use those in his website for promotional purposes.",
+            "language":"en-US",
+            "domain":"construction-payments",
+            "is_created_by_user":false,
+            "manually_entered_text":"",
+            "parts":[
+
+            ]
+          }
+        ],
+        "excluded_terms":[
+
+        ],
+        "recorded_requests":[
+
+        ]
+      },
+      {
+        "id":null,
+        "title":"Parties",
+        "can_be_removed":false,
+        "is_in_footer":true,
+        "domain":"gen-parties",
+        "included_terms":[
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"%s - %s, company reg. No %s, located at %s, VAT payer code: %s regulated under the laws of %s, in the document referred to as «SERVICE PROVIDER»,",
+            "language":"en-US",
+            "domain":"gen-parties",
+            "is_created_by_user":false,
+            "manually_entered_text":"",
+            "parts":[
+              {
+                "position_id":0,
+                "text":"Service Provider"
+              },
+              {
+                "position_id":1,
+                "text":"Company name, LLC"
+              },
+              {
+                "position_id":2,
+                "text":"302695151"
+              },
+              {
+                "position_id":3,
+                "text":"Washington Ave. 250 - 50, Chicago, IL"
+              },
+              {
+                "position_id":4,
+                "text":"IL303030000"
+              },
+              {
+                "position_id":5,
+                "text":"Illinois, United States of America"
+              }
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"%s - %s, company reg. No %s, located at %s, VAT payer code: %s regulated under the laws of %s, in this agreement referred to as «Client»,",
+            "language":"en-US",
+            "domain":"gen-parties",
+            "is_created_by_user":false,
+            "manually_entered_text":"",
+            "parts":[
+              {
+                "position_id":0,
+                "text":"Customer"
+              },
+              {
+                "position_id":1,
+                "text":"Company name"
+              },
+              {
+                "position_id":2,
+                "text":"120300000"
+              },
+              {
+                "position_id":3,
+                "text":"Churchil Ave. 150 - 30, Chicago, IL"
+              },
+              {
+                "position_id":4,
+                "text":"IL3111xxxxxx"
+              },
+              {
+                "position_id":5,
+                "text":"Illinois, United States of America"
+              }
+            ]
+          },
+          {
+            "id":null,
+            "source_term_id":null,
+            "text":"are also referred to individually as «Party», and jointly as the «Parties» have concluded this Bathroom Renovation Services Agreement (hereinafter referred to as «Agreement») as follows:",
+            "language":"en-US",
+            "domain":"gen-parties",
+            "is_created_by_user":false,
+            "manually_entered_text":"",
+            "parts":[
+              "​"
+            ]
+          }
+        ],
+        "excluded_terms":[
+
+        ],
+        "recorded_requests":[
+
+        ]
+      }
+    ],
+    "language":"en-US",
+    "title":"Bathroom renovation agreement"
+  }
+}

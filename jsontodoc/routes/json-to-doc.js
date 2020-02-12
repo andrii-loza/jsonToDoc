@@ -33,6 +33,8 @@ const doc = new docx.Document({
     // description: 'A brief example of using docx',
 });
 
+//todo doc to request
+
 router.get('/', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../public', 'json.html'));
 });
@@ -46,20 +48,51 @@ router.post('/send-json', async function (req, res, next) {
     generateFooter();
     generateTable(doc, data['template'].sections);
 
-    const exporter = new docx.LocalPacker(doc);
-    exporter.pack('files/test1.docx');
 
-    res.writeHead(200, {
-        'Content-Type': 'application/doc',
-        'Content-Length': ''
-    });
+    const exporter = new docx.StreamPacker(doc);
+
+    const stream = exporter.pack();
+
+    // Express' response object
+    res.attachment("example.docx");
+    stream.pipe(res);
+
+    // const exporter = new docx.LocalPacker(doc);
+    // exporter.pack('files/test1.docx');
+
+    // const packer = new docx.Packer();
+    //
+    // packer.toBase64String(doc).then((string) => {
+    //     console.log(string);
+    // });
+    //
+    // res.download('files/test1.docx', 'demo.docx', function(err){
+    //     if (err) {
+    //         // if the file download fails, we throw an error
+    //         throw err;
+    //     }
+    // });
+
+
+    // res.writeHead(200, {
+    //     'Content-Type': 'application/doc',
+    //     'Content-Length': ''
+    // });
     // res.download('files/test1.docx', 'example.docx');
 
     // const converted = await base64Img.base64Sync(files[0].destinationPath);
     // res.send(converted);
-
-    var readStream = fileSystem.createReadStream('files/test1.docx');
-    readStream.pipe(res);
+    // res.writeHead(200, {
+    //     'Content-Type': 'audio/mpeg',
+    //     'Content-Length': stat.size
+    // });
+    //
+    //
+    // var filePath = path.join(__dirname, 'files/test1.docx');
+    // var stat = fileSystem.statSync(filePath);
+    // var readStream = fileSystem.createReadStream(filePath);
+    //
+    // readStream.pipe(res);
 
 
     // console.log('SUCCESS');

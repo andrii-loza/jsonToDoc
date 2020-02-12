@@ -10,30 +10,31 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    // res.render('index', { title: 'Image Compress' });
     res.sendFile(path.join(__dirname, '../public', 'image-compress.html'));
 });
 
 router.post('/compress', async (req, res, next) => {
-    const {src} = req.body;
-    const filepath = await base64Img.imgSync(src, 'routes', 'sent_photo');
-
-    // const min = parseFloat((+quality - 0.1).toFixed(1));
-    // const max = parseFloat((+quality + 0.1).toFixed(1));
-    const way = path.join(__dirname, '../' + filepath);
-    const files = await imagemin(['./' + filepath], {
-        destination: 'public/images',
+    const {src, quality, ext} = req.body;
+    let max;
+    let min;
+    const filepath = await base64Img.imgSync(src, '', 'img');
+    if (ext === 'png') {
+        min = parseFloat((+quality - 0.1).toFixed(1));
+        max = parseFloat((+quality + 0.1).toFixed(1));
+    }
+    const files = await imagemin([path.join('./' + filepath)], {
+        destination: 'public/images_converted',
         plugins: [
             imageminMozjpeg({
-                quality: 50
+                quality: +quality
             }),
             imageminPngquant({
-                quality: [0.4, 0.6]
+                quality: [min, max]
             })
         ]
     });
-    console.log(files);
-    res.send(files);
+    const converted = await base64Img.base64Sync(files[0].destinationPath);
+    res.send(converted);
 });
 
 module.exports = router;

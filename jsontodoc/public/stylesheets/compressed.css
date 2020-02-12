@@ -1,0 +1,27 @@
+#wrapper_select {
+    margin: 10px;
+}
+
+#my_select {
+    width: 200px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+#btn {
+    width: 200px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    border-radius: 2px;
+}
+
+#btn:disabled {
+    opacity: .5;
+}
+.wrapper_input_btn{
+    display: flex;
+}
+.container{
+    margin: 50px;
+}

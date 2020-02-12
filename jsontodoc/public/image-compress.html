@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="stylesheets/compressed.css">
 </head>
 <body>
 <div class="container">
+
     <img id="img" style="max-width: 500px" src="" alt="">
-
     <form>
-        <input id="input_file" type="file">
-        <select name="" id="">
-            <option disabled selected>Quality</option>
-        </select>
-        <button id="btn" type="button">Compress</button>
+        <div class="wrapper_input_btn">
+            <input id="input_file" type="file" required>
+            <button disabled id="btn" type="button">Compress</button>
+        </div>
+        <div id="wrapper_select">
+        </div>
     </form>
-    <img id="compressed_img" style="max-width: 500px" src="" alt="">
-
+    <div id="wrapper_compressed">
+        <img id="compressed_img" style="max-width: 500px" src="" alt="">
+    </div>
 </div>
 
 <script src="javascripts/compress.js"></script>

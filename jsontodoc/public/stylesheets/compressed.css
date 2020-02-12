@@ -1,5 +1,5 @@
 #wrapper_select {
-    margin: 10px;
+    margin-top: 10px;
 }
 
 #my_select {
@@ -19,9 +19,34 @@
 #btn:disabled {
     opacity: .5;
 }
-.wrapper_input_btn{
+
+.wrapper_input_btn {
     display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
 }
-.container{
+
+.container {
     margin: 50px;
+}
+
+.btn-container {
+    margin: 10px 40px;
+}
+
+a {
+    color: #00B7FF;
+    font-family: "Segoe UI";
+    font-size: 1.1em;
+    text-decoration: none;
+}
+
+.imgs_wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#size_not_compressed,#size_compressed {
+    font-size: 12px;
+    margin-top: 0px;
 }

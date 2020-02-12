@@ -11,7 +11,11 @@
 
 <form name="form">
     <textarea id="textarea" cols="60" rows="10" placeholder="Put json format"></textarea><br>
-    <input type="submit" value="Send">
+    <div class="form-btns">
+        <button><a href="/">Back</a></button>
+        <input type="submit" value="Send">
+    </div>
+
 </form>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -34,6 +38,13 @@
                 })
                 .fail(() => console.log('fail'));
         });
+        
+        // function back() {
+        //     $.ajax({
+        //         type: 'get',
+        //         url: 'json'
+        //     })
+        // }
 
         function saveByteArray(reportName, byte) {
             let blob = new Blob([byte], {type: "application/pdf"});

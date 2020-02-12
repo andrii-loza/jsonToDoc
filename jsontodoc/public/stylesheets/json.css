@@ -1,8 +1,19 @@
-input{
+form{width: 43%}
+
+a{text-decoration: none; color: inherit}
+input,button{
     margin: 10px 0px;
     padding: 10px;
 }
+.form-btns{
+    display: flex;
+    justify-content: space-between;
+}
 input:hover{
+    cursor: pointer;
+    border: 1px solid black;
+}
+button:hover{
     cursor: pointer;
     border: 1px solid black;
 }

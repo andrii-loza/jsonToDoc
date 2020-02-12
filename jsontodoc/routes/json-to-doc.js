@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var fileSystem = require('fs');
 var docx = require('docx-h4');
 
 const fs = require('fs');
@@ -48,7 +49,20 @@ router.post('/send-json', async function (req, res, next) {
     const exporter = new docx.LocalPacker(doc);
     exporter.pack('files/test1.docx');
 
-    console.log('SUCCESS');
+    res.writeHead(200, {
+        'Content-Type': 'application/doc',
+        'Content-Length': ''
+    });
+    // res.download('files/test1.docx', 'example.docx');
+
+    // const converted = await base64Img.base64Sync(files[0].destinationPath);
+    // res.send(converted);
+
+    var readStream = fileSystem.createReadStream('files/test1.docx');
+    readStream.pipe(res);
+
+
+    // console.log('SUCCESS');
 });
 
 function setStyles() {

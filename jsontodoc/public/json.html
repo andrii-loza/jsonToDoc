@@ -34,7 +34,9 @@
                 contentType: 'application/json',
             })
                 .done((res) => {
-                    saveByteArray(res);
+                    console.log(res);
+                    debugger;
+                    // saveByteArray(res);
                 })
                 .fail(() => console.log('fail'));
         });

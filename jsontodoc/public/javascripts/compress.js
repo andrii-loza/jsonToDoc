@@ -83,7 +83,7 @@ function handleData() {
         }
         idErrorMsg=null;
         const src_image = document.getElementById('img').getAttribute('src');
-        fetch('http://localhost:3000/image-compress/compress', {
+        fetch('/image-compress/compress', {
             method: 'post',
             body: JSON.stringify({src: src_image, quality, ext}),
             headers: {'Content-type': 'application/json'}

@@ -5,4 +5,7 @@ body {
 
 a {
   color: #00B7FF;
+  font-family: "Segoe UI";
+  font-size: 1.1em;
+  text-decoration: none;
 }

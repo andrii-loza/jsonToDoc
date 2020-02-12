@@ -38,7 +38,7 @@ router.post('/send-json', async function (req, res, next) {
 
     doc.Footer.addParagraph(createFooter());
 
-    // generateTable(doc);
+    generateTable(doc);
 
     const exporter = new docx.LocalPacker(doc);
     exporter.pack('files/test1.docx');

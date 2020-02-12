@@ -5,7 +5,7 @@ var docx = require('docx-h4');
 
 const fs = require('fs');
 
-const {Document, Paragraph, AlignmentType, Table, TableCell, TableRow, TabStopType, TabStopPosition, Section, Run, Packer, TextRun, Footer, Hyperlink} = docx;
+const {Paragraph, TextRun,} = docx;
 const doc = new docx.Document({
     creator: 'author',
     title: 'Sample Document',
@@ -43,7 +43,7 @@ router.post('/send-json', async function (req, res, next) {
     generateMainHeader(data['template'].title);
     generateSections(data);
     generateFooter();
-    generateTable(doc);
+    generateTable(doc, data['template'].sections);
 
     const exporter = new docx.LocalPacker(doc);
     exporter.pack('files/test1.docx');
@@ -125,7 +125,7 @@ function generateSubHeader(section, index) {
         )
     } else {
         doc.addParagraph(
-            new Paragraph(new TextRun(`${index+1}. ${section.title.toUpperCase()}`))
+            new Paragraph(new TextRun(`${index + 1}. ${section.title.toUpperCase()}`))
                 .style('subHeader')
         );
     }
@@ -155,33 +155,41 @@ function createFooter() {
     return par.style('text');
 }
 
-function generateSplitedPar() {
-    let par = new Paragraph('').left();
-    let textArr = [];
+function generateSplitedPar(term) {
+    const {parts} = term;
 
-    textArr.push(new TextRun('Contractor [Title]')
-        .font('Calibri (Заголовки)')
-        .size(tipsToPx(14))
-        .bold()
-        .color('4f81bd'));
-    textArr.push(generateTextRun('Company providing services, JSC'));
-    textArr.push(generateTextRun('Reg. no. 302695151'));
-    textArr.push(generateTextRun('Washington Ave. 250 - 50, Chicago, IL,'));
-    textArr.push(generateTextRun('Illinois, United States of America'));
+    let par = new Paragraph(''),
+        textArr = [];
+
+    parts.forEach((part, index) => {
+        if (index === 0) {
+            textArr.push(new TextRun(part.text)
+                .font('Calibri')
+                .size(tipsToPx(14))
+                .bold()
+                .color('4f81bd'));
+        } else {
+            textArr.push(generateTextRun(part.text));
+        }
+    });
+
+    textArr.push(generateTextRun(''));
     textArr.push(generateTextRun('________________________________________'));
     textArr.push(generateTextRun('Signature'));
 
     textArr.forEach(item => par.addRun(item));
-    par.left();
+    par.left().style('text');
     return par;
 }
 
-function generateTable(doc) {
+function generateTable(doc, data) {
+    let {included_terms} = data[data.length - 1];
+    const table = doc.createTable(1, 2);
     //todo margin between cells
 
-    const table = doc.createTable(1, 2);
-    table.getCell(0, 0).addContent(generateSplitedPar());
-    table.getCell(0, 1).addContent(generateSplitedPar());
+    for (let i = 0; i < 2; i++) {
+        table.getCell(0, i).addContent(generateSplitedPar(included_terms[i]));
+    }
 }
 
 function tipsToPx(num) {

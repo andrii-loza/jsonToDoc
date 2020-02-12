@@ -14,10 +14,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/compress', async (req, res, next) => {
-    const {src, quality, ext} = req.body;
+    const {src, quality} = req.body;
     let max;
     let min;
     const filepath = await base64Img.imgSync(src, '', 'img');
+    const index=filepath.indexOf('.');
+    const ext=filepath.slice(index+1);
     if (ext === 'png') {
         min = parseFloat((+quality - 0.1).toFixed(1));
         max = parseFloat((+quality + 0.1).toFixed(1));

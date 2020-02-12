@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="stylesheets/compressed.css">
 </head>
 <body>
+<div class="container">
 
-<h1>Image Compress</h1>
+    <img id="img" style="max-width: 500px" src="" alt="">
+    <form>
+        <div class="wrapper_input_btn">
+            <input id="input_file" type="file" required>
+            <button disabled id="btn" type="button">Compress</button>
+        </div>
+        <div id="wrapper_select">
+        </div>
+    </form>
+    <div id="wrapper_compressed">
+        <img id="compressed_img" style="max-width: 500px" src="" alt="">
+    </div>
+</div>
+
+<script src="javascripts/compress.js"></script>
 </body>
 </html>

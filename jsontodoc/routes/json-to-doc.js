@@ -38,28 +38,11 @@ router.get('/', function (req, res, next) {
 
 router.post('/send-json', async function (req, res, next) {
     let data = req.body;
-    console.log(data);
 
     setStyles();
-    doc.createParagraph(data['template'].title).style('mainHeader');
-
-    data['template'].sections.forEach((section, index) => {
-        generateSubHeader(section, index);
-        let mainIndex = index + 1;
-
-        section['included_terms'].forEach((term, index) => {
-            if (index === 0) {
-                let par = new Paragraph(generateNumberingTextRun(term.text, mainIndex, index)).style('text');
-                doc.addParagraph(par);
-            } else {
-                let par = new Paragraph(generateNumberingTextRun(term.text, mainIndex, index)).style('text');
-                doc.addParagraph(par);
-            }
-        });
-        doc.addParagraph(new Paragraph(generateTextRun('')));
-    });
-
-    doc.Footer.addParagraph(createFooter());
+    generateMainHeader(data['template'].title);
+    generateSections(data);
+    generateFooter();
     generateTable(doc);
 
     const exporter = new docx.LocalPacker(doc);
@@ -97,11 +80,37 @@ function setStyles() {
 }
 
 function generateNumberingTextRun(str, mainIndex, index) {
-    if (index) {
+    if (index === 0) {
         return new TextRun(`${mainIndex}.${index + 1} ${str}`).break().break();
     } else {
         return new TextRun(`${mainIndex}.${index + 1} ${str}`).break();
     }
+}
+
+function generateSections(data) {
+    data['template'].sections.forEach((section, index) => {
+        generateSubHeader(section, index);
+        let mainIndex = index + 1;
+
+        section['included_terms'].forEach((term, index) => {
+            if (index === 0) {
+                let par = new Paragraph(generateNumberingTextRun(term.text, mainIndex, index)).style('text');
+                doc.addParagraph(par);
+            } else {
+                let par = new Paragraph(generateNumberingTextRun(term.text, mainIndex, index)).style('text');
+                doc.addParagraph(par);
+            }
+        });
+        doc.addParagraph(new Paragraph(generateTextRun('')));
+    });
+}
+
+function generateMainHeader(str) {
+    doc.createParagraph(str).style('mainHeader');
+}
+
+function generateFooter() {
+    doc.Footer.addParagraph(createFooter());
 }
 
 function generateTextRun(str) {
@@ -109,13 +118,17 @@ function generateTextRun(str) {
 }
 
 function generateSubHeader(section, index) {
-    if (index === 0) doc.addParagraph(
-        new Paragraph(new TextRun(section.title.toUpperCase()).break()).style('subHeader')
-    );
-    else doc.addParagraph(
-        new Paragraph(new TextRun(section.title.toUpperCase()))
-            .style('subHeader').setCustomNumbering(1, 0)
-    );
+    if (index === 0) {
+        doc.addParagraph(
+            new Paragraph(new TextRun(section.title.toUpperCase()).break())
+                .style('subHeader')
+        )
+    } else {
+        doc.addParagraph(
+            new Paragraph(new TextRun(`${index+1}. ${section.title.toUpperCase()}`))
+                .style('subHeader')
+        );
+    }
 }
 
 function createFooter() {

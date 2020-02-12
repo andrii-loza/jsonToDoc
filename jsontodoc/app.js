@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var jsonToDocRouter = require('./routes/json-to-doc');
+var imageCompress = require('./routes/image-compress');
 
 var app = express();
 
@@ -19,5 +20,6 @@ app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 app.use('/json', jsonToDocRouter);
+app.use('/image-compress', imageCompress);
 
 module.exports = app;

@@ -6,30 +6,36 @@
     <link rel="stylesheet" href="stylesheets/compressed.css">
 </head>
 <body>
-<div class="btn-container">
-    <button><a href="/image-compress">Reload</a></button>
-</div>
-<div class="container">
-    <div class="imgs_wrapper">
-        <div class="wrapper_not_compressed">
-            <img id="img" style="max-width: 300px" src="" alt="">
-            <p id="size_not_compressed"></p>
-        </div>
-        <div id="wrapper_compressed">
-            <img id="compressed_img" style="max-width: 300px" src="" alt="">
-            <p id="size_compressed"></p>
-        </div>
+<div>
+    <h2 class="h2">Image Compression</h2>
+    <div class="btn-container">
+        <button><a href="/">Back</a></button>
+        <button><a href="/image-compress">Reload</a></button>
     </div>
-    <form>
-        <div class="wrapper_input_btn">
-            <div>
-                <input id="input_file" type="file">
-                <div id="wrapper_select"></div>
-            </div>
-            <button disabled id="btn" type="button">Compress</button>
-        </div>
-    </form>
+    <div class="container">
 
+        <form>
+            <div class="wrapper_input_btn">
+                <div>
+                    <input id="input_file" type="file">
+                    <div id="wrapper_select"></div>
+                </div>
+                <button disabled id="btn" type="button">Compress</button>
+            </div>
+            <div class="imgs_wrapper">
+                <div class="wrapper_not_compressed">
+                    <img id="img" style="max-width: 300px" src="" alt="">
+                    <p id="size_not_compressed"></p>
+                </div>
+                <div id="wrapper_compressed">
+                    <img id="compressed_img" style="max-width: 300px" src="" alt="">
+                    <p id="size_compressed"></p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="loader"></div>
 </div>
 
 <script src="javascripts/compress.js"></script>

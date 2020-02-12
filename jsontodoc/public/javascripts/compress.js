@@ -1,11 +1,11 @@
-let ext = null;
 let quality = null;
 let idSelect = null;
 
 
 function findExt(type) {
-    if (type === 'image/png') ext = 'png';
-    else if (type === 'image/jpeg') ext = 'jpg';
+    if (type === 'image/png') return 'png';
+    else if (type === 'image/jpeg') return 'jpg';
+
 }
 
 function calculateSizeToBytes(totalBytes) {
@@ -19,32 +19,37 @@ function calculateSizeToBytes(totalBytes) {
     }
 }
 
-function readURL(input, callback) {
-    quality = null;
-    if (input.files && input.files[0]) {
-        const size = calculateSizeToBytes(input.files[0].size);
-        document.getElementById('size_not_compressed').innerText = `Size: ${size}`;
-        findExt(input.files[0].type);
-        let reader = new FileReader();
+function readURL(input) {
+    return new Promise((resolve => {
+        quality = null;
+        if (input.files && input.files[0]) {
+            const size = calculateSizeToBytes(input.files[0].size);
+            document.getElementById('size_not_compressed').innerText = `Size: ${size}`;
+            document.getElementById('btn').style.display = 'block';
+            const ext = findExt(input.files[0].type);
+            let reader = new FileReader();
 
-        reader.onload = function (e) {
-            document.getElementById('img').setAttribute('src', e.target.result);
-            if (idSelect && isSelect(idSelect)) {
-                document.getElementById(idSelect).remove();
-            }
-            callback()
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
+            reader.onload = function (e) {
+                document.getElementById('img').setAttribute('src', e.target.result);
+                if (idSelect && isSelect(idSelect)) {
+                    document.getElementById(idSelect).remove();
+                }
+                resolve(ext)
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }));
 }
 
 document.getElementById('input_file').addEventListener('change', function () {
-    readURL(this, createSelect);
+    readURL(this).then((ext) => {
+        createSelect(ext)
+    });
 });
 
 document.getElementById('btn').addEventListener('click', handleData);
 
-function createSelect() {
+function createSelect(ext) {
     const wrapper = document.getElementById('wrapper_select');
     const select = document.createElement('select');
     const opt = document.createElement('option');
@@ -61,7 +66,7 @@ function createSelect() {
 
     wrapper.appendChild(select);
     if (ext === 'jpg') {
-        for (let i = 1; i < 100; i++) {
+        for (let i = 5; i <= 100; i += 5) {
             const opt = document.createElement('option');
             opt.value = i;
             opt.innerHTML = i;
@@ -86,13 +91,16 @@ function isSelect(idName) {
 function handleData() {
     if (quality) {
         const src_image = document.getElementById('img').getAttribute('src');
+        const loader = document.querySelector('.loader')
+        loader.style.display = 'block';
         fetch('/image-compress/compress', {
             method: 'post',
-            body: JSON.stringify({src: src_image, quality, ext}),
+            body: JSON.stringify({src: src_image, quality}),
             headers: {'Content-type': 'application/json'}
         }).then(res => res.text())
             .then(res => {
                 document.getElementById('compressed_img').setAttribute('src', res);
+                loader.style.display = 'none';
                 checkSize(res);
             })
     }

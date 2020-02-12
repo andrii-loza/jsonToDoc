@@ -1,0 +1,8 @@
+input{
+    margin: 10px 0px;
+    padding: 10px;
+}
+input:hover{
+    cursor: pointer;
+    border: 1px solid black;
+}

@@ -5,10 +5,30 @@ var docx = require('docx-h4');
 
 const fs = require('fs');
 
-const {Document, Paragraph, Table, TableCell, TableRow, TabStopType, TabStopPosition, Section, Run, Packer, TextRun, Footer, Hyperlink} = docx;
+const {Document, Paragraph, AlignmentType, Table, TableCell, TableRow, TabStopType, TabStopPosition, Section, Run, Packer, TextRun, Footer, Hyperlink} = docx;
 const doc = new docx.Document({
     creator: 'author',
-    title: 'Sample Document'
+    title: 'Sample Document',
+    numbering: {
+        config: [
+            {
+                reference: 'numbering',
+                levels: [
+                    {
+                        level: 0,
+                        format: 'upperRoman',
+                        text: '%1',
+                        alignment: 'start',
+                        style: {
+                            paragraph: {
+                                indent: {left: 2880, hanging: 2420},
+                            },
+                        },
+                    }
+                ]
+            }
+        ]
+    }
     // description: 'A brief example of using docx',
 });
 
@@ -23,28 +43,29 @@ router.post('/send-json', async function (req, res, next) {
     setStyles();
     doc.createParagraph(data['template'].title).style('mainHeader');
 
-    data['template'].sections.forEach(section => {
-        doc.addParagraph(new Paragraph(new TextRun(section.title.toUpperCase()).break().break()).style('subHeader'));
+    data['template'].sections.forEach((section, index) => {
+        generateSubHeader(section, index);
+        let mainIndex = index + 1;
+
         section['included_terms'].forEach((term, index) => {
-            if(index===0) {
-                let par = new Paragraph(new TextRun(term.text).break().break()).style('text');
+            if (index === 0) {
+                let par = new Paragraph(generateNumberingTextRun(term.text, mainIndex, index)).style('text');
                 doc.addParagraph(par);
             } else {
-                let par = new Paragraph(new TextRun(term.text).break()).style('text');
+                let par = new Paragraph(generateNumberingTextRun(term.text, mainIndex, index)).style('text');
                 doc.addParagraph(par);
             }
         });
+        doc.addParagraph(new Paragraph(generateTextRun('')));
     });
 
     doc.Footer.addParagraph(createFooter());
-
     generateTable(doc);
 
     const exporter = new docx.LocalPacker(doc);
     exporter.pack('files/test1.docx');
 
     console.log('SUCCESS');
-
 });
 
 function setStyles() {
@@ -75,15 +96,45 @@ function setStyles() {
         .left();
 }
 
+function generateNumberingTextRun(str, mainIndex, index) {
+    if (index) {
+        return new TextRun(`${mainIndex}.${index + 1} ${str}`).break().break();
+    } else {
+        return new TextRun(`${mainIndex}.${index + 1} ${str}`).break();
+    }
+}
+
+function generateTextRun(str) {
+    return new TextRun(str).break().break();
+}
+
+function generateSubHeader(section, index) {
+    if (index === 0) doc.addParagraph(
+        new Paragraph(new TextRun(section.title.toUpperCase()).break()).style('subHeader')
+    );
+    else doc.addParagraph(
+        new Paragraph(new TextRun(section.title.toUpperCase()))
+            .style('subHeader').setCustomNumbering(1, 0)
+    );
+}
+
 function createFooter() {
     const par = new Paragraph();
 
     let arr = [];
     arr.push(new TextRun('Document created using '));
-    arr.push(new TextRun('DoneDeal.Today').bold());
+    arr.push(new TextRun('DoneDeal.Today')
+        .bold());
     arr.push(new TextRun(' app. Get app free by visiting '));
-    arr.push(new TextRun(`www.donedeal.today`).underline().break());
-    arr.push(new TextRun('Disclaimer ').bold().break().break());
+    arr.push(new TextRun(`www.donedeal.today`)
+        .underline()
+        .break());
+    // arr.push(new TextRun(new Hyperlink('www.donedeal.today')).break());
+    //todo hyperlink
+    arr.push(new TextRun('Disclaimer: ')
+        .bold()
+        .break()
+        .break());
     arr.push(new TextRun('this document provided without no warranties in a „as is“ state. This is not a legal advice,' +
         'parties should carefully review all sections in this document.'));
 
@@ -100,12 +151,12 @@ function generateSplitedPar() {
         .size(tipsToPx(14))
         .bold()
         .color('4f81bd'));
-    textArr.push(new TextRun('Company providing services, JSC').break().break());
-    textArr.push(new TextRun('Reg. no. 302695151').break().break());
-    textArr.push(new TextRun('Washington Ave. 250 - 50, Chicago, IL,').break().break());
-    textArr.push(new TextRun('Illinois, United States of America').break().break());
-    textArr.push(new TextRun('________________________________________').break().break());
-    textArr.push(new TextRun('Signature').break().break());
+    textArr.push(generateTextRun('Company providing services, JSC'));
+    textArr.push(generateTextRun('Reg. no. 302695151'));
+    textArr.push(generateTextRun('Washington Ave. 250 - 50, Chicago, IL,'));
+    textArr.push(generateTextRun('Illinois, United States of America'));
+    textArr.push(generateTextRun('________________________________________'));
+    textArr.push(generateTextRun('Signature'));
 
     textArr.forEach(item => par.addRun(item));
     par.left();
@@ -113,9 +164,11 @@ function generateSplitedPar() {
 }
 
 function generateTable(doc) {
+    //todo margin between cells
+
     const table = doc.createTable(1, 2);
-    table.getCell(0, 0).addContent(generateSplitedPar(doc));
-    table.getCell(0, 1).addContent(generateSplitedPar(doc));
+    table.getCell(0, 0).addContent(generateSplitedPar());
+    table.getCell(0, 1).addContent(generateSplitedPar());
 }
 
 function tipsToPx(num) {

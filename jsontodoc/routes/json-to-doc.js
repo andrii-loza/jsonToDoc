@@ -3,10 +3,11 @@ var router = express.Router();
 var path = require('path');
 var fileSystem = require('fs');
 var docx = require('docx-h4');
+var builder = require('docx-builder');
 
 const fs = require('fs');
 
-const {Paragraph, TextRun,} = docx;
+const {Paragraph, TextRun, Packer} = docx;
 const doc = new docx.Document({
     creator: 'author',
     title: 'Sample Document',
@@ -48,54 +49,12 @@ router.post('/send-json', async function (req, res, next) {
     generateFooter();
     generateTable(doc, data['template'].sections);
 
+    var exporter = new docx.ExpressPacker(doc, res);
+    exporter.pack("My First Document");
 
-    const exporter = new docx.StreamPacker(doc);
-
-    const stream = exporter.pack();
-
-    // Express' response object
-    res.attachment("example.docx");
-    stream.pipe(res);
-
-    // const exporter = new docx.LocalPacker(doc);
-    // exporter.pack('files/test1.docx');
-
-    // const packer = new docx.Packer();
-    //
-    // packer.toBase64String(doc).then((string) => {
-    //     console.log(string);
-    // });
-    //
-    // res.download('files/test1.docx', 'demo.docx', function(err){
-    //     if (err) {
-    //         // if the file download fails, we throw an error
-    //         throw err;
-    //     }
-    // });
-
-
-    // res.writeHead(200, {
-    //     'Content-Type': 'application/doc',
-    //     'Content-Length': ''
-    // });
-    // res.download('files/test1.docx', 'example.docx');
-
-    // const converted = await base64Img.base64Sync(files[0].destinationPath);
-    // res.send(converted);
-    // res.writeHead(200, {
-    //     'Content-Type': 'audio/mpeg',
-    //     'Content-Length': stat.size
-    // });
-    //
-    //
-    // var filePath = path.join(__dirname, 'files/test1.docx');
-    // var stat = fileSystem.statSync(filePath);
-    // var readStream = fileSystem.createReadStream(filePath);
-    //
-    // readStream.pipe(res);
-
-
-    // console.log('SUCCESS');
+    doc.save(__dirname + 'files/test1.docx', function (err) {
+        if(err) console.log(err);
+    })
 });
 
 function setStyles() {

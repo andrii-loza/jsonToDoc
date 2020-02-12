@@ -9,10 +9,7 @@ input,button{
     display: flex;
     justify-content: space-between;
 }
-input:hover{
-    cursor: pointer;
-    border: 1px solid black;
-}
+
 button:hover{
     cursor: pointer;
     border: 1px solid black;

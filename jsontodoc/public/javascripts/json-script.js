@@ -21,6 +21,9 @@ $(function () {
                 let res = JSON.parse(xhr.response);
                 if(res) alert('Now check ./files folder in the project root directory');
 
+                $("#inp-file").val('');
+                document.querySelector('#send').style.display = 'none';
+
                 //to download file from back-end
 
                 // let content = xhr.response;

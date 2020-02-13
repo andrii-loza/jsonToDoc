@@ -7,5 +7,5 @@ In the root directory run commands:
 
 _Open application on localhost:3000_
 
-After pressing send in the Json to Doc demo go to files folder in the root directory and open file test1.docx
+After pressing send in the Json to Doc demo go to public/files folder in the root directory and open file test1.docx
 

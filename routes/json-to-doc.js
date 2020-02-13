@@ -44,7 +44,7 @@ router.post('/send-json', async function (req, res, next) {
     generateTable(doc, data['template'].sections);
 
     const exporter = new docx.LocalPacker(doc);
-    exporter.pack('files/test1.docx');
+    exporter.pack('public/files/test1.docx');
     res.send({message: 'success'});
 
     // to download file on front-end

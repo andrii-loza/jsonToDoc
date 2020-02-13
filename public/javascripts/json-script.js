@@ -19,7 +19,7 @@ $(function () {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = JSON.parse(xhr.response);
-                if(res) alert('Now check ./files folder in the project root directory');
+                if(res) alert('Now check .public/files folder in the project root directory');
 
                 $("#inp-file").val('');
                 document.querySelector('#send').style.display = 'none';

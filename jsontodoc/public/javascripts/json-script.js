@@ -7,7 +7,7 @@ $(function () {
             makePostRequest(reader.result);
         };
 
-        let file = document.forms[0].elements[0].files[0];
+        let file = document.forms[0].elements[1].files[0];
         reader.readAsText(file);
     });
 
@@ -36,7 +36,6 @@ $(function () {
     function downloadwithpost(filename, content) {
         var link = document.createElement('a');
         var bytes = new Array(content.length);
-        // var bytes = new Array(content.length);
         for (var i = 0; i < content.length; i++) {
             bytes[i] = content.charCodeAt(i);
         }
@@ -65,4 +64,15 @@ $(function () {
         // oUploadCollection.addItem(newItem);
         // oUploadCollection.downloadItem(newItem, true);
     }
+
+    document.querySelectorAll('.blue-button')[1].addEventListener('click', () => {
+        document.querySelector("input[type='file']").click();
+
+    });
+
+
+    $("#inp-file").change(function (e) {
+        if (e.target.files.length > 0) document.querySelector('#send').style.display = 'inline-block';
+    });
+
 });

@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="stylesheets/json.css">
 </head>
 <body>
-<h1>Json to Doc</h1>
+
+<button class="blue-button"><a href="/">Back</a></button>
+
 
 <form name="form">
-    <input type="file" name="file">
-    <div class="form-btns">
-        <button><a href="/">Back</a></button>
-        <input type="submit" value="Send">
-    </div>
+    <h1>Json to Doc</h1>
 
+    <button class="blue-button" type="button">
+        Select file<input type="file" id="inp-file" name="file" style="display: none" required>
+    </button>
+    <button class="blue-button" type="submit" id="send" style="display: none">Send</button>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"

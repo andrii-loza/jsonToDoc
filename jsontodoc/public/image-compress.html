@@ -7,17 +7,21 @@
 </head>
 <body>
 <div>
-    <h2 class="h2">Image Compression</h2>
     <div class="btn-container">
-        <button><a href="/">Back</a></button>
-        <button><a href="/image-compress">Reload</a></button>
+        <button class="blue-button"><a href="/">Back</a></button>
+        <button class="blue-button"><a href="/image-compress">Reload</a></button>
     </div>
     <div class="container">
 
         <form>
+            <h2 class="h2">Image Compression</h2>
             <div class="wrapper_input_btn">
                 <div>
-                    <input id="input_file" type="file">
+                    <button class="blue-button">
+                        Select image
+                        <input id="input_file" type="file" accept='image/*' style="display:none;">
+                    </button>
+                    
                     <div id="wrapper_select"></div>
                 </div>
                 <button disabled id="btn" type="button">Compress</button>

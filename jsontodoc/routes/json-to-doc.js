@@ -1,13 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var fileSystem = require('fs');
 var docx = require('docx-h4');
-var builder = require('docx-builder');
 
-const fs = require('fs');
-
-const {Paragraph, TextRun, Packer} = docx;
+const {Paragraph, TextRun} = docx;
 const doc = new docx.Document({
     creator: 'author',
     title: 'Sample Document',
@@ -33,8 +29,6 @@ const doc = new docx.Document({
     }
     // description: 'A brief example of using docx',
 });
-
-//todo doc to request
 
 router.get('/', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../public', 'json.html'));
@@ -148,8 +142,6 @@ function createFooter() {
     arr.push(new TextRun(`www.donedeal.today`)
         .underline()
         .break());
-    // arr.push(new TextRun(new Hyperlink('www.donedeal.today')).break());
-    //todo hyperlink
     arr.push(new TextRun('Disclaimer: ')
         .bold()
         .break()
@@ -191,7 +183,6 @@ function generateSplitedPar(term) {
 function generateTable(doc, data) {
     let {included_terms} = data[data.length - 1];
     const table = doc.createTable(1, 2);
-    //todo margin between cells
 
     for (let i = 0; i < 2; i++) {
         table.getCell(0, i).addContent(generateSplitedPar(included_terms[i]));

@@ -8,7 +8,6 @@ const imagemin = require('imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 
-/* GET home page. */
 router.get('/', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../public', 'image-compress.html'));
 });

@@ -8,6 +8,14 @@
     border-radius: 4px;
 }
 
+body{
+    font: 14px 'Segoe UI';
+}
+
+form{
+    padding: 40px;
+}
+
 #btn:disabled {
     opacity: .5;
 }
@@ -25,7 +33,7 @@
 }
 
 a {
-    color: #00B7FF;
+    color: white;
     font-family: "Segoe UI";
     font-size: 1.1em;
     text-decoration: none;
@@ -70,10 +78,6 @@ a {
     outline: none;
  }
 
-
-
-
-
 .h2 {
     margin: 10px;
 }
@@ -99,4 +103,27 @@ a {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.blue-button {
+    padding: 13px 30px;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+    border: 0;
+    border-radius: 50px;
+    background-color: rgb(46, 193, 224);
+    box-shadow: 0 18px 38px 0 rgba(0, 0, 0, 0.32);
+    transition: .3s;
+}
+
+.blue-button:hover, .blue-button:focus {
+    color: rgb(46, 193, 224);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 1px 1px rgb(46, 193, 224) !important;
+}
+
+.blue-button:hover {
+    cursor: pointer;
 }

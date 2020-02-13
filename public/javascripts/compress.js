@@ -5,7 +5,6 @@ let idSelect = null;
 function findExt(type) {
     if (type === 'image/png') return 'png';
     else if (type === 'image/jpeg') return 'jpg';
-
 }
 
 function calculateSizeToBytes(totalBytes) {
@@ -40,14 +39,6 @@ function readURL(input) {
         }
     }));
 }
-
-document.getElementById('input_file').addEventListener('change', function () {
-    readURL(this).then((ext) => {
-        createSelect(ext)
-    });
-});
-
-document.getElementById('btn').addEventListener('click', handleData);
 
 function createSelect(ext) {
     const wrapper = document.getElementById('wrapper_select');
@@ -116,6 +107,14 @@ function checkSize(imageUrl) {
     };
     xhr.send();
 }
+
+document.getElementById('input_file').addEventListener('change', function () {
+    readURL(this).then((ext) => {
+        createSelect(ext)
+    });
+});
+
+document.getElementById('btn').addEventListener('click', handleData);
 
 document.querySelectorAll('.blue-button')[2].addEventListener('click', () => {
     document.querySelector("input[type='file']").click();

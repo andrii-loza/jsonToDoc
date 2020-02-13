@@ -18,15 +18,9 @@ $(function () {
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-
-                var content = xhr.response;
-                var fileName = 'rapport.docx'; // You can use the .txt extension if you want
+                let content = xhr.response;
+                let fileName = 'rapport.docx';
                 downloadwithpost(fileName, content);
-
-                // console.log(xhr.responseText);
-                // debugger;
-                // let json = JSON.parse(xhr.responseText);
-                // debugger;
             }
         };
 
@@ -34,42 +28,31 @@ $(function () {
     }
 
     function downloadwithpost(filename, content) {
-        var link = document.createElement('a');
-        var bytes = new Array(content.length);
-        for (var i = 0; i < content.length; i++) {
+        let link = document.createElement('a');
+        let bytes = new Array(content.length);
+        for (let i = 0; i < content.length; i++) {
             bytes[i] = content.charCodeAt(i);
         }
-        var byteArray = new Uint8Array(bytes);
-        var blob = new Blob([byteArray], {
+        let byteArray = new Uint8Array(bytes);
+        let blob = new Blob([byteArray], {
             type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         });
-        var url = URL.createObjectURL(blob);
-        var oItem = {
-            documentId: url,
-            fileName: "rapport.docx",
-            thumbnailUrl: "",
-            url: url,
-            selected: true
-        };
+        let url = URL.createObjectURL(blob);
 
         let a = document.createElement('a');
         a.href = url;
         a.download = filename;
         a.click();
         window.URL.revokeObjectURL(url);
-
-        // window.location.assign(url);
-        // var oUploadCollection = this.getView().byId("uploadCollection");
-        // var newItem = new sap.m.UploadCollectionItem(oItem);
-        // oUploadCollection.addItem(newItem);
-        // oUploadCollection.downloadItem(newItem, true);
     }
 
     document.querySelectorAll('.blue-button')[1].addEventListener('click', () => {
         document.querySelector("input[type='file']").click();
-
     });
 
+    document.querySelectorAll('.blue-button')[0].addEventListener('click', (e) => {
+        document.querySelector('#back').click();
+    });
 
     $("#inp-file").change(function (e) {
         if (e.target.files.length > 0) document.querySelector('#send').style.display = 'inline-block';

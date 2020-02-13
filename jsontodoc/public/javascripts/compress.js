@@ -116,3 +116,12 @@ function checkSize(imageUrl) {
     };
     xhr.send();
 }
+
+document.querySelectorAll('.blue-button')[2].addEventListener('click', () => {
+    document.querySelector("input[type='file']").click();
+});
+
+$("#input_file").change(function (e) {
+    console.log('selected');
+    // if (e.target.files.length > 0) document.querySelector('#send').style.display = 'inline-block';
+});

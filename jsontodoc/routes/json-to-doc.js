@@ -43,10 +43,17 @@ router.post('/send-json', async function (req, res, next) {
     generateFooter();
     generateTable(doc, data['template'].sections);
 
-
     const exporter = new docx.LocalPacker(doc);
     exporter.pack('files/test1.docx');
     res.send({message: 'success'});
+
+    // to download file on front-end
+    // var exporter = new docx.ExpressPacker(doc, res);
+    // exporter.pack("My First Document");
+    //
+    // doc.save(__dirname + 'files/test1.docx', function (err) {
+    //     if(err) console.log(err);
+    // })
 });
 
 function setStyles() {

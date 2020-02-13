@@ -20,6 +20,10 @@ $(function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = JSON.parse(xhr.response);
                 if(res) alert('Now check ./files folder in the project root directory');
+
+                // let content = xhr.response;
+                // let fileName = 'rapport.docx';
+                // downloadwithpost(fileName, content);
             }
         };
 
@@ -38,4 +42,22 @@ $(function () {
         if (e.target.files.length > 0) document.querySelector('#send').style.display = 'inline-block';
     });
 
+    function downloadwithpost(filename, content) {
+        let link = document.createElement('a');
+        let bytes = new Array(content.length);
+        for (let i = 0; i < content.length; i++) {
+            bytes[i] = content.charCodeAt(i);
+        }
+        let byteArray = new Uint8Array(bytes);
+        let blob = new Blob([byteArray], {
+            type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        });
+        let url = URL.createObjectURL(blob);
+
+        let a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
 });

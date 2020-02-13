@@ -95,7 +95,7 @@ function generateNumberingTextRun(str, mainIndex, index) {
 
 function generateSections(data, doc) {
     data['template'].sections.forEach((section, index) => {
-        generateSubHeader(section, index);
+        generateSubHeader(section, index, doc);
         let mainIndex = index + 1;
 
         section['included_terms'].forEach((term, index) => {
@@ -123,7 +123,7 @@ function generateTextRun(str) {
     return new TextRun(str).break().break();
 }
 
-function generateSubHeader(section, index) {
+function generateSubHeader(section, index,doc) {
     if (index === 0) {
         doc.addParagraph(
             new Paragraph(new TextRun(section.title.toUpperCase()).break())

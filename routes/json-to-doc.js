@@ -4,31 +4,6 @@ var path = require('path');
 var docx = require('docx-h4');
 
 const {Paragraph, TextRun} = docx;
-const doc = new docx.Document({
-    creator: 'author',
-    title: 'Sample Document',
-    numbering: {
-        config: [
-            {
-                reference: 'numbering',
-                levels: [
-                    {
-                        level: 0,
-                        format: 'upperRoman',
-                        text: '%1',
-                        alignment: 'start',
-                        style: {
-                            paragraph: {
-                                indent: {left: 2880, hanging: 2420},
-                            },
-                        },
-                    }
-                ]
-            }
-        ]
-    }
-    // description: 'A brief example of using docx',
-});
 
 router.get('/', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../public', 'json.html'));
@@ -37,10 +12,36 @@ router.get('/', function (req, res, next) {
 router.post('/send-json', async function (req, res, next) {
     let data = req.body;
 
-    setStyles();
-    generateMainHeader(data['template'].title);
-    generateSections(data);
-    generateFooter();
+    const doc = new docx.Document({
+        creator: 'author',
+        title: 'Sample Document',
+        numbering: {
+            config: [
+                {
+                    reference: 'numbering',
+                    levels: [
+                        {
+                            level: 0,
+                            format: 'upperRoman',
+                            text: '%1',
+                            alignment: 'start',
+                            style: {
+                                paragraph: {
+                                    indent: {left: 2880, hanging: 2420},
+                                },
+                            },
+                        }
+                    ]
+                }
+            ]
+        }
+        // description: 'A brief example of using docx',
+    });
+
+    setStyles(doc);
+    generateMainHeader(data['template'].title, doc);
+    generateSections(data, doc);
+    generateFooter(doc);
     generateTable(doc, data['template'].sections);
 
     const exporter = new docx.LocalPacker(doc);
@@ -56,7 +57,7 @@ router.post('/send-json', async function (req, res, next) {
     // })
 });
 
-function setStyles() {
+function setStyles(doc) {
     doc.Styles.createParagraphStyle('mainHeader', 'Main Header')
         .basedOn('Normal')
         .next('Normal')
@@ -92,7 +93,7 @@ function generateNumberingTextRun(str, mainIndex, index) {
     }
 }
 
-function generateSections(data) {
+function generateSections(data, doc) {
     data['template'].sections.forEach((section, index) => {
         generateSubHeader(section, index);
         let mainIndex = index + 1;
@@ -110,11 +111,11 @@ function generateSections(data) {
     });
 }
 
-function generateMainHeader(str) {
+function generateMainHeader(str, doc) {
     doc.createParagraph(str).style('mainHeader');
 }
 
-function generateFooter() {
+function generateFooter(doc) {
     doc.Footer.addParagraph(createFooter());
 }
 

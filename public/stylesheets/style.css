@@ -1,40 +1,120 @@
 body {
-  padding: 50px;
-  font: 14px "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0;
+    font: 14px "Segoe UI", Helvetica, Arial, sans-serif;
 }
+
+h1 {
+    margin: 0 0 30px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 15px;
+}
+
 a {
-  color: white;
-  font-family: "Segoe UI";
-  font-size: 1.1em;
-  text-decoration: none;
+    color: white;
+    font-family: "Segoe UI";
+    font-size: 1.1em;
+    text-decoration: none;
 }
-button {
-  padding: 5px;
-  margin-right: 20px;
+
+.content {
+    padding: 30px 0;
 }
-button:hover{
-  border: 2px solid #00B7FF;
+
+.content .btn-wrapper {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.content .btn-wrapper .blue-button:first-child {
+    margin-right: 20px;
 }
 
 .blue-button {
-  padding: 13px 30px;
-  text-transform: uppercase;
-  font-size: 12px;
-  text-align: center;
-  color: white;
-  border: 0;
-  border-radius: 50px;
-  background-color: rgb(46, 193, 224);
-  box-shadow: 0 18px 38px 0 rgba(0, 0, 0, 0.32);
-  transition: .3s;
+    display: block;
+    padding: 8px 18px;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: center;
+    color: #2ec1e0;
+    border: 1px solid #2ec1e0;
+    border-radius: 50px;
+    background-color: white;
+    transition: .3s;
 }
 
 .blue-button:hover, .blue-button:focus {
-  color: rgb(46, 193, 224);
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 0 1px 1px rgb(46, 193, 224) !important;
+    background-color: rgb(46, 193, 224);
+    color: rgb(255, 255, 255);
+    outline: none;
 }
 
 .blue-button:hover {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+.blue-button a {
+    color: inherit;
+}
+
+form {
+    padding: 40px 0;
+}
+
+#my_select {
+    width: 200px;
+    height: 30px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.blue-button#btn {
+    background-color: #2ec1e0;
+    color: white;
+}
+
+#btn:disabled {
+    cursor: auto;
+    opacity: .5;
+}
+
+.imgs_wrapper {
+    display: flex;
+    margin: 25px 0;
+}
+
+#size_not_compressed, #size_compressed {
+    font-size: 12px;
+    margin-top: 0;
+}
+
+
+#wrapper_compressed {
+    margin-left: 50px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #2ec1e0; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    animation: spin 2s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

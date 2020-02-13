@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="stylesheets/compressed.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
-<div>
-    <div class="btn-container" style="margin: 20px 0px">
-        <a class="blue-button" id="back" href="/">Back</a>
-        <a class="blue-button" id="image-compress" href="/image-compress">Reload</a>
-    </div>
-    <div class="container">
-
+<div class="container">
+    <div class="content">
+        <div class="btn-wrapper">
+            <a class="blue-button" id="back" href="/">Back</a>
+            <a class="blue-button" id="image-compress" href="/image-compress">Reload</a>
+        </div>
         <form>
-            <h2 class="h2">Image Compression</h2>
-            <div class="wrapper_input_btn">
-                <div>
+            <h1>Image Compression</h1>
+            <div class="btn-wrapper">
+<!--                <div>-->
                     <button class="blue-button" type="button">
                         Select image
                         <input id="input_file" type="file" accept='image/*' style="display:none;">
                     </button>
-                    
-                    <div id="wrapper_select"></div>
-                </div>
-                <button disabled id="btn" type="button">Compress</button>
+<!--                    <div id="wrapper_select"></div>-->
+<!--                </div>-->
+                <button class="blue-button" disabled id="btn" type="button">Compress</button>
             </div>
+            <div id="wrapper_select"></div>
             <div class="imgs_wrapper">
                 <div class="wrapper_not_compressed">
                     <img id="img" style="max-width: 300px" src="" alt="">
@@ -37,9 +36,9 @@
                 </div>
             </div>
         </form>
-    </div>
 
-    <div class="loader"></div>
+        <div class="loader"></div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"

@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <title>Json</title>
     <base href="/">
-    <link rel="stylesheet" href="stylesheets/json.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
+<div class="container">
+    <div class="content">
+        <button class="blue-button"><a id="back" href="/">Back</a></button>
+        <form name="form">
+            <h1>Json to Doc</h1>
+            <div class="btn-wrapper">
+                <button class="blue-button" type="button">
+                    Select file<input type="file" id="inp-file" name="file" style="display: none" required>
+                </button>
+                <button class="blue-button" type="submit" id="send" style="display: none">Send</button>
+            </div>
+        </form>
 
-<button class="blue-button"><a id="back" href="/">Back</a></button>
-
-
-<form name="form">
-    <h1>Json to Doc</h1>
-
-    <button class="blue-button" type="button">
-        Select file<input type="file" id="inp-file" name="file" style="display: none" required>
-    </button>
-    <button class="blue-button" type="submit" id="send" style="display: none">Send</button>
-</form>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="

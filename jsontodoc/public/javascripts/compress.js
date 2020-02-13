@@ -16,6 +16,7 @@ function calculateSizeToBytes(totalBytes) {
     } else {
         _size = (totalBytes / 1024000).toFixed(2) + ' MB';
         return _size
+
     }
 }
 

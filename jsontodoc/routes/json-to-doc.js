@@ -43,12 +43,10 @@ router.post('/send-json', async function (req, res, next) {
     generateFooter();
     generateTable(doc, data['template'].sections);
 
-    var exporter = new docx.ExpressPacker(doc, res);
-    exporter.pack("My First Document");
 
-    doc.save(__dirname + 'files/test1.docx', function (err) {
-        if(err) console.log(err);
-    })
+    const exporter = new docx.LocalPacker(doc);
+    exporter.pack('files/test1.docx');
+    res.send({message: 'success'});
 });
 
 function setStyles() {

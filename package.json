@@ -14,7 +14,7 @@
     "docx": "^4.0.0",
     "docx-builder": "^1.0.7",
     "docx-h4": "^3.3.11",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "file-saver": "^2.0.2",
     "fs": "0.0.1-security",
     "imagemin": "^7.0.1",
